@@ -1,0 +1,127 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+#interface {
+    font-size: 18pt;
+    padding: 10px;
+    border: none;
+    border-bottom: solid 3px #c9c9c9;
+    transition: border 0.3s;
+    height: 40px;
+    width: 330px;
+}
+
+#interface:focus {
+    outline: none;
+    border-bottom: solid 3px #2EA6C5;
+}
+
+#app {
+    width: 350px;
+    float: left;
+}
+
+.center {
+    margin-top: 200px;
+    width: 1090px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.completions {
+    margin-top: 0px;
+    list-style: none;
+    width: 330px;
+    font-size: 14pt;
+    padding: 10px;
+    outline: 1px solid #F3F1F1;
+}
+
+.completion:hover {
+    background-color: #F3F1F1;
+}
+
+.selected-completion {
+    background-color: #F3F1F1;
+}
+
+.card {
+    border-top: solid 2px #912CE2;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    outline: 1px solid #F3F1F1;
+    width: 330px;
+}
+
+.left {
+    width: 350px;
+    padding: 10px;
+    float: left;
+}
+
+.right {
+    width: 350px;
+    padding: 10px;
+    float: right;
+}
+
+.contents {
+    float: initial;
+}
+
+.pins .card {
+    border-top: solid 2px #8489E8;
+}
+
+.histories .card {
+    border-top: solid 2px #84E8CB;
+}
+
+.histories .icon {
+    display: none;
+}
+
+.title {
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.header-icon {
+    color: #A5A5A5;
+    padding: 3px;
+    margin-left: 154px;
+}
+
+.card-icon {
+    color: #A5A5A5;
+    padding: 3px;
+    float: right;
+}
+
+.pins .octicon-pin {
+    color: black;
+}
+
+
+.icon:hover {
+    color: black;
+}
+
+
+.body {
+    font-size: 18pt;
+}
+
+b.command {
+    padding-right: 5pt;
+}
+
+i.info {
+    color: #c9c9c9;
+}
+
+img {
+    width: 100%;
+}

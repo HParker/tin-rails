@@ -1,0 +1,8 @@
+## {{title}}
+![poster]({{poster_path}})
+
+**Released**: {{release_date}} **Rating**: {{vote_average}}/10
+
+> {{overview}}
+
+<sub>_Info provided by [TMDB](https://www.themoviedb.org/movie/{{id}})_</sub>

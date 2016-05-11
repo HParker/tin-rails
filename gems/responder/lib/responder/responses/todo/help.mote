@@ -1,0 +1,5 @@
+Todo takes a todo item you wish to get done.
+whatever you input after `todo` is returned in the body
+
+Example:
+> todo feed fluffy

@@ -1,0 +1,4 @@
+weather looks up weather info for your location based on your IP location
+
+Example:
+> weather

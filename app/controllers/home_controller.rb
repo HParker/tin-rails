@@ -1,5 +1,3 @@
 class HomeController < ApplicationController
-  def index
-    render text: "hello there"
-  end
+  def index; end
 end
