@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/HParker/responder.git
-  revision: 2a3008498f9f8949d8017ad642996ed3cb1dfba3
+  revision: f66d2437b067630389851ab14f159f43bc6fdc79
   specs:
     responder (0.1.0)
       maxminddb
