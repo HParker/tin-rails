@@ -1,4 +1,13 @@
 GIT
+  remote: git://github.com/HParker/responder.git
+  revision: dd38988e73c645bd6e63b8b48a9e61f81efdaf28
+  specs:
+    responder (0.1.0)
+      maxminddb
+      mote
+      themoviedb
+
+GIT
   remote: git://github.com/rails/rails.git
   revision: 33f8dac38b07165e4046f99e47958e7aad053947
   specs:
@@ -64,14 +73,6 @@ PATH
     api (0.1.0)
       rails (>= 5.0.0.rc1, < 5.1)
       responder
-
-PATH
-  remote: gems/responder
-  specs:
-    responder (0.1.0)
-      maxminddb
-      mote
-      themoviedb
 
 GEM
   remote: https://rubygems.org/
