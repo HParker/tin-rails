@@ -1,3 +1,3 @@
 [submodule "tin-web"]
 	path = tin-web
-	url = git@github.com:HParker/tin-web.git
+	url = https://github.com/HParker/tin-web.git
