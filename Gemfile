@@ -52,5 +52,5 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Plugins
-gem 'responder', path: 'gems/responder'
+gem 'responder', github: 'HParker/responder.git'
 gem 'api', path: 'engines/api'
