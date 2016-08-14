@@ -47,6 +47,7 @@ body {
 }
 
 .card {
+    box-shadow: 1px 1px 3px #6b6b6b;
     border-top: solid 2px #912CE2;
     margin-top: 10px;
     margin-bottom: 10px;
