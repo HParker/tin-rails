@@ -18,5 +18,6 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", ">= 5.0.0.rc1", "< 5.1"
   s.add_dependency 'responder'
+  s.add_dependency 'sidekiq'
   s.add_development_dependency "sqlite3"
 end
