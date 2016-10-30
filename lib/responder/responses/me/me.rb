@@ -3,10 +3,10 @@ require_relative '../base'
 require 'maxminddb'
 
 module Responder
-  class Ip < Base
-    KEYWORD = 'whoami'
+  class Me < Base
+    KEYWORD = 'me'
 
-    keyword KEYWORD, info: 'Show your identification'
+    keyword KEYWORD, info: 'Show your identity'
 
     def initialize(info)
       @info = info

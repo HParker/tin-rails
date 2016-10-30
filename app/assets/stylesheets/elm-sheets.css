@@ -11,6 +11,12 @@
 
 }
 
+.logo img {
+    border-radius: 50%;
+    width: 96%;
+    padding-top: 2%;
+}
+
 .logo h1 {
     padding-top: 10px;
 }

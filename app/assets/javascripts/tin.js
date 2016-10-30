@@ -10025,9 +10025,6 @@ var _user$project$Cards$init = A2(
 	_elm_lang$core$Native_List.fromArray(
 		[]),
 	0);
-var _user$project$Cards$NoMove = function (a) {
-	return {ctor: 'NoMove', _0: a};
-};
 var _user$project$Cards$Card = function (a) {
 	return {ctor: 'Card', _0: a};
 };
@@ -10118,8 +10115,6 @@ var _user$project$Cards$update = F2(
 							_elm_lang$core$Platform_Cmd$batch(fxs))
 					};
 				}
-			case 'NoMove':
-				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 			case 'AddFailed':
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 			default:
@@ -10131,9 +10126,6 @@ var _user$project$Cards$Get = function (a) {
 };
 var _user$project$Cards$NoOp = {ctor: 'NoOp'};
 
-var _user$project$Input$sendCard = function (command) {
-	return _elm_lang$core$Platform_Cmd$none;
-};
 var _user$project$Input$storeCommand = F2(
 	function (command, model) {
 		var completions = model.completions;
@@ -10228,7 +10220,7 @@ var _user$project$Input$view = function (model) {
 							_user$project$AutoComplete$ShowCompletion(true))),
 						_elm_lang$html$Html_Events$onBlur(
 						_user$project$Input$AutoComplete(
-							_user$project$AutoComplete$ShowCompletion(false))),
+							_user$project$AutoComplete$ShowCompletion(true))),
 						_elm_lang$html$Html_Events$onInput(_user$project$Input$StoreVal)
 					]),
 				_elm_lang$core$Native_List.fromArray(
@@ -10244,10 +10236,42 @@ var _user$project$Input$Completions = function (a) {
 };
 var _user$project$Input$NoOp = {ctor: 'NoOp'};
 
-var _user$project$Main$Model = F4(
-	function (a, b, c, d) {
-		return {input: a, cards: b, pins: c, histories: d};
+var _user$project$Main$userDecode = A2(_elm_lang$core$Json_Decode_ops[':='], 'image_url', _elm_lang$core$Json_Decode$string);
+var _user$project$Main$viewLogo = function (model) {
+	return _elm_lang$core$Native_Utils.eq(model.image, '') ? A2(
+		_elm_lang$html$Html$h1,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html$text('Tin')
+			])) : A2(
+		_elm_lang$html$Html$img,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$src(model.image)
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[]));
+};
+var _user$project$Main$Model = F3(
+	function (a, b, c) {
+		return {input: a, cards: b, image: c};
 	});
+var _user$project$Main$Flags = function (a) {
+	return {image_url: a};
+};
+var _user$project$Main$NotLoggedIn = function (a) {
+	return {ctor: 'NotLoggedIn', _0: a};
+};
+var _user$project$Main$LoggedIn = function (a) {
+	return {ctor: 'LoggedIn', _0: a};
+};
+var _user$project$Main$getImage = A3(
+	_elm_lang$core$Task$perform,
+	_user$project$Main$NotLoggedIn,
+	_user$project$Main$LoggedIn,
+	A2(_evancz$elm_http$Http$get, _user$project$Main$userDecode, 'api/me'));
 var _user$project$Main$Push = function (a) {
 	return {ctor: 'Push', _0: a};
 };
@@ -10264,32 +10288,28 @@ var _user$project$Main$makeRequest = function (model) {
 		model.cards);
 	var cards = _p0._0;
 	var fx = _p0._1;
-	var newHistories = A2(
-		_user$project$Cards$add,
-		A3(_user$project$Card$build, '', model.input.command, 0),
-		model.histories);
 	var newInput = A2(_user$project$Input$storeCommand, '', model.input);
 	return {
 		ctor: '_Tuple2',
 		_0: _elm_lang$core$Native_Utils.update(
 			model,
-			{input: newInput, cards: cards, histories: newHistories}),
+			{input: newInput, cards: cards, image: model.image}),
 		_1: A2(_elm_lang$core$Platform_Cmd$map, _user$project$Main$Cards, fx)
 	};
 };
 var _user$project$Main$Input = function (a) {
 	return {ctor: 'Input', _0: a};
 };
-var _user$project$Main$init = function () {
+var _user$project$Main$init = function (flags) {
 	var _p1 = _user$project$Input$init;
 	var input = _p1._0;
 	var fx = _p1._1;
 	return {
 		ctor: '_Tuple2',
-		_0: A4(_user$project$Main$Model, input, _user$project$Cards$init, _user$project$Cards$init, _user$project$Cards$init),
+		_0: A3(_user$project$Main$Model, input, _user$project$Cards$init, flags.image_url),
 		_1: A2(_elm_lang$core$Platform_Cmd$map, _user$project$Main$Input, fx)
 	};
-}();
+};
 var _user$project$Main$update = F2(
 	function (action, model) {
 		var _p2 = action;
@@ -10333,7 +10353,7 @@ var _user$project$Main$update = F2(
 						{input: input}),
 					_1: A2(_elm_lang$core$Platform_Cmd$map, _user$project$Main$Input, fx)
 				};
-			default:
+			case 'Cards':
 				var _p5 = A2(_user$project$Cards$update, _p2._0, model.cards);
 				var cards = _p5._0;
 				var fx = _p5._1;
@@ -10344,6 +10364,10 @@ var _user$project$Main$update = F2(
 						{cards: cards}),
 					_1: A2(_elm_lang$core$Platform_Cmd$map, _user$project$Main$Cards, fx)
 				};
+			case 'LoggedIn':
+				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+			default:
+				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 		}
 	});
 var _user$project$Main$view = function (model) {
@@ -10363,14 +10387,7 @@ var _user$project$Main$view = function (model) {
 					]),
 				_elm_lang$core$Native_List.fromArray(
 					[
-						A2(
-						_elm_lang$html$Html$h1,
-						_elm_lang$core$Native_List.fromArray(
-							[]),
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html$text('Tin')
-							]))
+						_user$project$Main$viewLogo(model)
 					])),
 				A2(
 				_elm_lang$html$Html$div,
@@ -10392,7 +10409,7 @@ var _user$project$Main$view = function (model) {
 			]));
 };
 var _user$project$Main$main = {
-	main: _elm_lang$html$Html_App$program(
+	main: _elm_lang$html$Html_App$programWithFlags(
 		{
 			init: _user$project$Main$init,
 			update: _user$project$Main$update,
@@ -10405,6 +10422,13 @@ var _user$project$Main$main = {
 							A2(_elm_lang$websocket$WebSocket$listen, 'ws://localhost:8020/my-channel', _user$project$Main$Push)
 						]));
 			}
+		}),
+	flags: A2(
+		_elm_lang$core$Json_Decode$andThen,
+		A2(_elm_lang$core$Json_Decode_ops[':='], 'image_url', _elm_lang$core$Json_Decode$string),
+		function (image_url) {
+			return _elm_lang$core$Json_Decode$succeed(
+				{image_url: image_url});
 		})
 };
 

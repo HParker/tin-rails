@@ -13,10 +13,14 @@ module Api
       render json: response.as_json
     end
 
+    def me
+      render json: current_user
+    end
+
     protected
 
     def current_user
-      User.find_by(id: session[:user_id])
+      User.find_by(id: session[:user_id]) || NullUser.new
     end
   end
 end

@@ -28,14 +28,6 @@ module Responder
       {}
     end
 
-    def refresh_rate
-      0
-    end
-
-    def refresh_url
-      ''
-    end
-
     private
 
     def help_template_path
