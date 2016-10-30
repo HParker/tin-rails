@@ -1,0 +1,4 @@
+whoami returns the your current ip as well as where the city and country that ip is believed to be in.
+
+Example:
+> whoami

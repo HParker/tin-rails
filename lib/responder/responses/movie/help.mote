@@ -1,0 +1,4 @@
+movie will lookup a movie on TMDB and provide information about it.
+
+Example:
+> movie deadpool

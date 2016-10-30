@@ -9918,8 +9918,6 @@ var _user$project$Card$update = F2(
 						{collapsed: toggle}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				} : {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
-			case 'Move':
-				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 			case 'Delete':
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 			default:
@@ -9946,9 +9944,6 @@ var _user$project$Card$decode = A3(
 	A2(_elm_lang$core$Json_Decode_ops[':='], 'body', _elm_lang$core$Json_Decode$string));
 var _user$project$Card$Delete = function (a) {
 	return {ctor: 'Delete', _0: a};
-};
-var _user$project$Card$Move = function (a) {
-	return {ctor: 'Move', _0: a};
 };
 var _user$project$Card$Collapse = function (a) {
 	return {ctor: 'Collapse', _0: a};
@@ -9982,16 +9977,6 @@ var _user$project$Card$view = function (card) {
 						_elm_lang$html$Html_Attributes$class('card-icon icon octicon octicon-x'),
 						_elm_lang$html$Html_Events$onClick(
 						_user$project$Card$Delete(card.id))
-					]),
-				_elm_lang$core$Native_List.fromArray(
-					[])),
-				A2(
-				_elm_lang$html$Html$span,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html_Attributes$class('card-icon icon octicon octicon-pin'),
-						_elm_lang$html$Html_Events$onClick(
-						_user$project$Card$Move(card.id))
 					]),
 				_elm_lang$core$Native_List.fromArray(
 					[])),
@@ -10042,16 +10027,6 @@ var _user$project$Cards$init = A2(
 	0);
 var _user$project$Cards$NoMove = function (a) {
 	return {ctor: 'NoMove', _0: a};
-};
-var _user$project$Cards$Move = function (a) {
-	return {ctor: 'Move', _0: a};
-};
-var _user$project$Cards$moveCard = function (cards) {
-	return A3(
-		_elm_lang$core$Task$perform,
-		_user$project$Cards$NoMove,
-		_user$project$Cards$Move,
-		_elm_lang$core$Task$succeed(cards));
 };
 var _user$project$Cards$Card = function (a) {
 	return {ctor: 'Card', _0: a};
@@ -10108,66 +10083,42 @@ var _user$project$Cards$update = F2(
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
 			case 'Card':
-				var _p4 = _p0._0;
-				var _p1 = _p4;
-				switch (_p1.ctor) {
-					case 'Delete':
-						var newCards = A2(
-							_elm_lang$core$List$filter,
-							function (c) {
-								return !_elm_lang$core$Native_Utils.eq(c.id, _p1._0);
-							},
-							model.cards);
-						return {
-							ctor: '_Tuple2',
-							_0: _elm_lang$core$Native_Utils.update(
-								model,
-								{cards: newCards}),
-							_1: _elm_lang$core$Platform_Cmd$none
-						};
-					case 'Move':
-						var _p2 = _p1._0;
-						var movingCards = A2(
-							_elm_lang$core$List$filter,
-							function (c) {
-								return _elm_lang$core$Native_Utils.eq(c.id, _p2);
-							},
-							model.cards);
-						var newCards = A2(
-							_elm_lang$core$List$filter,
-							function (c) {
-								return !_elm_lang$core$Native_Utils.eq(c.id, _p2);
-							},
-							model.cards);
-						return {
-							ctor: '_Tuple2',
-							_0: _elm_lang$core$Native_Utils.update(
-								model,
-								{cards: newCards}),
-							_1: _user$project$Cards$moveCard(movingCards)
-						};
-					default:
-						var _p3 = _elm_lang$core$List$unzip(
-							A2(
-								_elm_lang$core$List$map,
-								_user$project$Card$update(_p4),
-								model.cards));
-						var newCards = _p3._0;
-						var fxs = _p3._1;
-						return {
-							ctor: '_Tuple2',
-							_0: _elm_lang$core$Native_Utils.update(
-								model,
-								{cards: newCards}),
-							_1: A2(
-								_elm_lang$core$Platform_Cmd$map,
-								_user$project$Cards$Card,
-								_elm_lang$core$Platform_Cmd$batch(fxs))
-						};
+				var _p3 = _p0._0;
+				var _p1 = _p3;
+				if (_p1.ctor === 'Delete') {
+					var newCards = A2(
+						_elm_lang$core$List$filter,
+						function (c) {
+							return !_elm_lang$core$Native_Utils.eq(c.id, _p1._0);
+						},
+						model.cards);
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Native_Utils.update(
+							model,
+							{cards: newCards}),
+						_1: _elm_lang$core$Platform_Cmd$none
+					};
+				} else {
+					var _p2 = _elm_lang$core$List$unzip(
+						A2(
+							_elm_lang$core$List$map,
+							_user$project$Card$update(_p3),
+							model.cards));
+					var newCards = _p2._0;
+					var fxs = _p2._1;
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Native_Utils.update(
+							model,
+							{cards: newCards}),
+						_1: A2(
+							_elm_lang$core$Platform_Cmd$map,
+							_user$project$Cards$Card,
+							_elm_lang$core$Platform_Cmd$batch(fxs))
+					};
 				}
 			case 'NoMove':
-				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
-			case 'Move':
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 			case 'AddFailed':
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
@@ -10270,7 +10221,6 @@ var _user$project$Input$view = function (model) {
 				_elm_lang$html$Html$input,
 				_elm_lang$core$Native_List.fromArray(
 					[
-						_elm_lang$html$Html_Attributes$placeholder('Hello Friend'),
 						_elm_lang$html$Html_Attributes$value(model.command),
 						_elm_lang$html$Html_Attributes$id('interface'),
 						_elm_lang$html$Html_Events$onFocus(
@@ -10303,12 +10253,6 @@ var _user$project$Main$Push = function (a) {
 };
 var _user$project$Main$HandleKeypress = function (a) {
 	return {ctor: 'HandleKeypress', _0: a};
-};
-var _user$project$Main$History = function (a) {
-	return {ctor: 'History', _0: a};
-};
-var _user$project$Main$Pins = function (a) {
-	return {ctor: 'Pins', _0: a};
 };
 var _user$project$Main$Cards = function (a) {
 	return {ctor: 'Cards', _0: a};
@@ -10389,66 +10333,16 @@ var _user$project$Main$update = F2(
 						{input: input}),
 					_1: A2(_elm_lang$core$Platform_Cmd$map, _user$project$Main$Input, fx)
 				};
-			case 'Cards':
-				var _p7 = _p2._0;
-				var _p5 = _p7;
-				if (_p5.ctor === 'Move') {
-					return {
-						ctor: '_Tuple2',
-						_0: _elm_lang$core$Native_Utils.update(
-							model,
-							{
-								pins: A2(_user$project$Cards$addCards, _p5._0, model.pins)
-							}),
-						_1: _elm_lang$core$Platform_Cmd$none
-					};
-				} else {
-					var _p6 = A2(_user$project$Cards$update, _p7, model.cards);
-					var cards = _p6._0;
-					var fx = _p6._1;
-					return {
-						ctor: '_Tuple2',
-						_0: _elm_lang$core$Native_Utils.update(
-							model,
-							{cards: cards}),
-						_1: A2(_elm_lang$core$Platform_Cmd$map, _user$project$Main$Cards, fx)
-					};
-				}
-			case 'Pins':
-				var _p10 = _p2._0;
-				var _p8 = _p10;
-				if (_p8.ctor === 'Move') {
-					return {
-						ctor: '_Tuple2',
-						_0: _elm_lang$core$Native_Utils.update(
-							model,
-							{
-								cards: A2(_user$project$Cards$addCards, _p8._0, model.cards)
-							}),
-						_1: _elm_lang$core$Platform_Cmd$none
-					};
-				} else {
-					var _p9 = A2(_user$project$Cards$update, _p10, model.pins);
-					var cards = _p9._0;
-					var fx = _p9._1;
-					return {
-						ctor: '_Tuple2',
-						_0: _elm_lang$core$Native_Utils.update(
-							model,
-							{pins: cards}),
-						_1: A2(_elm_lang$core$Platform_Cmd$map, _user$project$Main$Pins, fx)
-					};
-				}
 			default:
-				var _p11 = A2(_user$project$Cards$update, _p2._0, model.pins);
-				var cards = _p11._0;
-				var fx = _p11._1;
+				var _p5 = A2(_user$project$Cards$update, _p2._0, model.cards);
+				var cards = _p5._0;
+				var fx = _p5._1;
 				return {
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
 						model,
-						{histories: cards}),
-					_1: A2(_elm_lang$core$Platform_Cmd$map, _user$project$Main$History, fx)
+						{cards: cards}),
+					_1: A2(_elm_lang$core$Platform_Cmd$map, _user$project$Main$Cards, fx)
 				};
 		}
 	});
@@ -10465,60 +10359,17 @@ var _user$project$Main$view = function (model) {
 				_elm_lang$html$Html$div,
 				_elm_lang$core$Native_List.fromArray(
 					[
-						_elm_lang$html$Html_Attributes$class('left')
+						_elm_lang$html$Html_Attributes$class('logo')
 					]),
 				_elm_lang$core$Native_List.fromArray(
 					[
 						A2(
-						_elm_lang$html$Html$span,
+						_elm_lang$html$Html$h1,
+						_elm_lang$core$Native_List.fromArray(
+							[]),
 						_elm_lang$core$Native_List.fromArray(
 							[
-								_elm_lang$html$Html_Attributes$class('header-icon icon mega-octicon octicon-book')
-							]),
-						_elm_lang$core$Native_List.fromArray(
-							[])),
-						A2(
-						_elm_lang$html$Html$div,
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html_Attributes$class('contents histories')
-							]),
-						_elm_lang$core$Native_List.fromArray(
-							[
-								A2(
-								_elm_lang$html$Html_App$map,
-								_user$project$Main$History,
-								_user$project$Cards$view(model.histories))
-							]))
-					])),
-				A2(
-				_elm_lang$html$Html$div,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html_Attributes$class('right')
-					]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						A2(
-						_elm_lang$html$Html$span,
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html_Attributes$class('header-icon icon mega-octicon octicon-pin')
-							]),
-						_elm_lang$core$Native_List.fromArray(
-							[])),
-						A2(
-						_elm_lang$html$Html$div,
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html_Attributes$class('contents pins')
-							]),
-						_elm_lang$core$Native_List.fromArray(
-							[
-								A2(
-								_elm_lang$html$Html_App$map,
-								_user$project$Main$Pins,
-								_user$project$Cards$view(model.pins))
+								_elm_lang$html$Html$text('Tin')
 							]))
 					])),
 				A2(
@@ -10546,7 +10397,7 @@ var _user$project$Main$main = {
 			init: _user$project$Main$init,
 			update: _user$project$Main$update,
 			view: _user$project$Main$view,
-			subscriptions: function (_p12) {
+			subscriptions: function (_p6) {
 				return _elm_lang$core$Platform_Sub$batch(
 					_elm_lang$core$Native_List.fromArray(
 						[

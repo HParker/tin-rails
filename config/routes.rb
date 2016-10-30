@@ -3,5 +3,6 @@ Rails.application.routes.draw do
   get 'completion', to: 'completion#index'
   # get 'api', to: 'api#show'
   mount Api::Engine => "/api"
+  get '/auth/:provider/callback', to: 'sessions#create'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

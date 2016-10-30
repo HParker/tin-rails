@@ -17,13 +17,10 @@ gem 'coffee-rails', '~> 4.1.0'
 # gem 'therubyracer', platforms: :ruby
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.0'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-gem 'crono'
+gem 'bcrypt', '~> 3.1.7'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -50,6 +47,14 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'sidekiq'
 # Plugins
-gem 'responder', path: '../responder'
+# gem 'responder', path: '../responder'
 gem 'api', path: 'engines/api'
 gem 'sock-drawer'
+gem 'crono'
+gem 'feedjira'
+gem 'mote'
+gem 'maxminddb'
+gem 'forecast_io'
+gem 'themoviedb'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'

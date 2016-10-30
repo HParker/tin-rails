@@ -1,0 +1,12 @@
+# {{user.name}}
+
+![picture]({{user.image_url}})
+
+IP: {{ip}}
+
+**City**: {{city}} **Country**: {{country}}
+
+<sub>
+  This product includes GeoLite2 data created by MaxMind, available from
+  [maximind](http://www.maxmind.com).
+</sub>
