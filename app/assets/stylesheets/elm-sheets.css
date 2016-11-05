@@ -51,6 +51,8 @@ body {
     margin-right: auto;
 }
 
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
 .completions {
     margin-top: 0px;
     list-style: none;
@@ -58,6 +60,8 @@ body {
     font-size: 14pt;
     padding: 10px;
     outline: 1px solid #F3F1F1;
+    animation: fadeIn;
+    animation-duration: 100ms;
 }
 
 .completion:hover {
